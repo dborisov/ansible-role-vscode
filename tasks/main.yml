@@ -1,0 +1,12 @@
+---
+- name: Ensure Visual Studio Code repository is present
+  yum_repository:
+    name: vscode
+    description: Visual Studio Code
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    gpgcheck: yes
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+
+- name: Ensure Visual Studio Code is installed
+  yum:
+    name: code
