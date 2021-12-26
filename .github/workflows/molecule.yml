@@ -3,8 +3,8 @@ on: push
 jobs:
   molecule:
     runs-on: ubuntu-latest
+    env:
+      working-directory: vscode
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: vscode
       - uses: gofrolist/molecule-action@v2
