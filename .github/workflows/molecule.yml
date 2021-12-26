@@ -1,10 +1,25 @@
 on: push
 
+defaults:
+  run:
+    working-directory: 'vscode'
+
 jobs:
   molecule:
     runs-on: ubuntu-latest
-    env:
-      working-directory: vscode
     steps:
-      - uses: actions/checkout@v2
-      - uses: gofrolist/molecule-action@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: 'vscode'
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Molecule
+        run: pip3 install ansible molecule[docker]
+
+      - name: Run Molecule tests
+        run: molecule test
