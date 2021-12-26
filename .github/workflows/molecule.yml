@@ -23,3 +23,5 @@ jobs:
 
       - name: Run Molecule tests
         run: molecule test
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
