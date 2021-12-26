@@ -1,0 +1,27 @@
+on: push
+
+defaults:
+  run:
+    working-directory: 'vscode'
+
+jobs:
+  molecule:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          path: 'vscode'
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install Molecule
+        run: pip3 install ansible ansible-lint molecule[docker,lint]
+
+      - name: Run Molecule tests
+        run: molecule test
+        env:
+          ANSIBLE_FORCE_COLOR: '1'
